@@ -7,7 +7,32 @@ import {
   undoComparing
 } from "../../Redux/rootReducer";
 import {connect} from "react-redux";
-import {Card} from "./index";
+import {Card} from "./CardClass";
+import React from "react";
+
+
+export class CardContainer extends React.Component {
+
+
+
+  render() {
+
+    let shuffle = (array) => {
+      for (let i = array.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]]
+      }
+      return array // ? check is this immutable thing
+    }
+
+    shuffle(this.props.cardsPage.cards)
+    return (
+     <>
+       <Card cards={this.props.cardsPage.cards}/>
+     </>
+      )
+  }
+}
 
 
 const mapStateToProps = (state) => {
@@ -40,6 +65,6 @@ const mapDispatchToProps = (dispatch) => {
     }
   }
 }
-const CardsContainer = connect(mapStateToProps, mapDispatchToProps)(Card)
+const CardsContainer = connect(mapStateToProps, mapDispatchToProps)(CardContainer)
 
 export default CardsContainer
