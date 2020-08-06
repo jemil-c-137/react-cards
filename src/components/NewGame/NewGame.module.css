@@ -1,0 +1,16 @@
+.container {
+  width: 100%;
+  height: 100%;
+  background: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  background: #B2FF59;
+  width: 350px;
+  height: 100px;
+  text-align: center;
+
+}

@@ -1,21 +1,38 @@
 import {
   cardClickedAC,
   comparingAC,
-  handleFlipCardAC,
+  handleFlipCardAC, restartGameAC,
   setMathchedCards,
   setToCompare, shuffleCardsAC,
   undoComparing
 } from "../../Redux/rootReducer";
 import {connect} from "react-redux";
-import {Card} from "./CardClass";
+import {Card} from "./index";
 import React from "react";
 
 
 export class CardContainer extends React.Component {
 
-  handleClick = (e) => {
+  restart = (guessedCards) => {
+    debugger;
+    if(guessedCards.length === this.props.cards.length) {
+      this.props.restartGame()
+/*      setTimeout( () => {
+        this.shuffle(this.props.cards)
+      })*/
 
-    if (this.props.cardsPage.canFlip && !e.isComparing) {
+    }
+
+  }/*
+  shuffle = (cardsToShuffle) => {
+    for (let i = cardsToShuffle.length - 1; i >= 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      [cardsToShuffle[i], cardsToShuffle[j]] = [cardsToShuffle[j], cardsToShuffle[i]]
+    }
+    this.props.shuffleAlgorithm(cardsToShuffle)
+  }*/
+  handleClick = (e) => {
+    if (this.props.canFlip && !e.isComparing && !e.isGuessed) {
       this.props.flipCard(e.id)
       this.props.handleCanFlip(false)
       setTimeout(() => {
@@ -27,23 +44,14 @@ export class CardContainer extends React.Component {
       this.props.unSetComparing()
     }
   }
-
   componentDidMount() {
-    let shuffle = (cardsToShuffle) => {
-      for (let i = cardsToShuffle.length - 1; i >= 0; i--) {
-        let j = Math.floor(Math.random() * (i + 1));
-        [cardsToShuffle[i], cardsToShuffle[j]] = [cardsToShuffle[j], cardsToShuffle[i]]
-      }
-      this.props.shuffleAlgorithm(cardsToShuffle)
-    }
-    shuffle(this.props.cardsPage.cards)
+   // this.shuffle(this.props.cards)
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    if (prevProps.cardsPage.toCompare !== this.props.cardsPage.toCompare
-      && this.props.cardsPage.toCompare.length === 2) {
 
-      const comparingCards = this.props.cardsPage.toCompare
+  compareCards = (comparingCards) => {
+    //const comparingCards = this.props.toCompare
+    //if (comparingCards.length === 2) {
       if (comparingCards[0].type === comparingCards[1].type) {
         comparingCards.forEach(card => {
           this.props.matchCards(card.id)
@@ -52,29 +60,58 @@ export class CardContainer extends React.Component {
       } else {
         this.props.unSetComparing()
       }
+    //}
+  }
+
+
+  componentDidUpdate(prevProps) {
+    debugger;
+    let guessedCards = this.props.cards.filter(card => card.isGuessed === true);
+    if (this.props.toCompare.length === 2) {
+      this.compareCards(this.props.toCompare)
+    }
+   /* if (this.props.toCompare.length === 2) {
+      console.log(this.props)
+      const comparingCards = this.props.toCompare
+      if (comparingCards[0].type === comparingCards[1].type) {
+        comparingCards.forEach(card => {
+          this.props.matchCards(card.id)
+        })
+        this.props.unSetComparing()
+      } else {
+        this.props.unSetComparing()
+      }
+    } */if ( guessedCards.length === 16) {
+      debugger;
+      this.restart(this.props.cards)
+/*      this.props.restartGame()
+      setTimeout(() => {
+        this.shuffle(this.props.cards)
+      })*/
     }
   }
 
 
   render() {
-
     return (
      <>
-       <Card handleClick={this.handleClick} cards={this.props.cardsPage.cards}
+       <Card handleClick={this.handleClick}
+             cards={this.props.cards}
+             guessedCards={this.props.cards.filter(card => card.isGuessed === true)}
+             restart={this.restart}
        />
      </>
       )
   }
 }
 
-
 const mapStateToProps = (state) => {
   return {
-    cardsPage: state.cardsPageRed
+    cards: state.cardsPage.cards,
+    toCompare: state.cardsPage.toCompare,
+    canFlip: state.cardsPage.canFlip
   }
 }
-
-
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -98,6 +135,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     shuffleAlgorithm: (cardsToShuffle) => {
       dispatch(shuffleCardsAC(cardsToShuffle))
+    },
+    restartGame: () => {
+      dispatch(restartGameAC())
     }
   }
 }

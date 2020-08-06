@@ -4,7 +4,7 @@ import cardsReducer from "./rootReducer";
 
 
 let reducers = combineReducers(
-  {cardsPageRed: cardsReducer}
+  {cardsPage: cardsReducer}
 )
 
 let store = createStore(reducers,

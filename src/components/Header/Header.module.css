@@ -1,0 +1,11 @@
+*, *::after, *::before {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.header {
+  font-size: 20px;
+  color: #B2FF59;
+  text-align: center;
+}

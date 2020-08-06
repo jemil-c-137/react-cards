@@ -1,13 +1,14 @@
 import React from 'react';
 import './App.css';
-
-import CardsContainer from "./components/Card/CardContainer";
+import Table from "./components/Wrapper";
+import Header from "./components/Header";
 
 
 function App() {
   return (
-    <div className="App">
-      <CardsContainer/>
+    <div className="app">
+      <Header />
+      <Table/>
     </div>
   );
 }
