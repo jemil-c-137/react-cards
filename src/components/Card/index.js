@@ -17,13 +17,6 @@ export function Card(props) {
               ? <div className={styles.cardHide + ' ' + styles.cardInner}> </div>
               : <div className={styles.cardBack + ' ' + styles.cardInner}> </div>
           }
-         {/* {
-            props.guessedCards.length === 16 &&
-            <button className={styles.newGame} onClick={() => {
-            props.restart()
-            }
-            }>New game</button>
-          }*/}
         </div>
       )
     })
