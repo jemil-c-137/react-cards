@@ -18,6 +18,7 @@ const SET_COMPARE = 'SET_COMPARE';
 const DEL_COMPARE = 'DEL_COMPARE';
 const SET_MATCHED = 'SET_MATCHED';
 const SET_CAN_FLIP = 'FLIP_HANDLER';
+const SHUFFLE_CARDS = 'SHUFFLE_CARDS';
 
 export const initialState = {
     cards: [
@@ -117,7 +118,12 @@ const cardsReducer = (state = initialState, action) => {
         })
       }
     }
-
+    case SHUFFLE_CARDS: {
+      return {
+        ...state,
+        cards: [...action.shuffledCards]
+      }
+    }
     default:
       return state
   }
@@ -131,4 +137,5 @@ export const comparingAC = (comparingCard) => { return {type: GET_COMPARE, compa
 export const setToCompare = (comparingCard) => { return {type: SET_COMPARE, comparingCard: comparingCard}}
 export const undoComparing = () => { return {type: DEL_COMPARE}};
 export const setMathchedCards = (matchedCard) => { return {type: SET_MATCHED, matchedCard: matchedCard}};
+export const shuffleCardsAC = (cards) => { return {type: SHUFFLE_CARDS, shuffledCards: cards }}
 export default cardsReducer
