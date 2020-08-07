@@ -5,6 +5,17 @@
 
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.container {
+  width: 60%;
+  margin: 0 auto;
+  height: 80%;
+  border: 3px solid #B2FF59;
+  background: rgba(46, 49, 49, .9);
+  display: flex;
   justify-content: center;
   align-items: center;
 }

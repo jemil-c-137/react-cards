@@ -1,16 +1,43 @@
 import React from 'react';
-import './App.css';
+
 import Table from "./components/Wrapper";
 import Header from "./components/Header";
+import RestartGame from "./components/NewGame";
+import {newGameAC, shuffleCardsAC} from "./Redux/rootReducer";
+import {connect} from "react-redux";
+import styles from './App.module.css'
 
 
-function App() {
+function App(props) {
   return (
-    <div className="app">
+    <div className={styles.app}>
       <Header />
-      <Table/>
+      <div className={styles.container}>
+        {props.gameOver ? <RestartGame {...props}/>
+          : <Table/>}
+      </div>
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    gameOver: state.cardsPage.gameOver,
+    cards: state.cardsPage.cards
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    shuffleCards: () => {
+      dispatch(shuffleCardsAC())
+    },
+    startNewGame: () => {
+      dispatch(newGameAC())
+    }
+  }
+
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
+

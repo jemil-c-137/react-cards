@@ -5,13 +5,9 @@
 }
 
 .container {
-
-  margin: 0 auto;
-  height: 90%;
-  border: 3px solid #B2FF59;
-  background: rgba(46, 49, 49, .9);
-
-  width: 60%;
+  padding: 5%;
+  width: 100%;
+  height: 100%;
   display: grid;
   grid-row-gap: 3%;
   grid-template-columns: repeat(4, 1fr);
