@@ -3,7 +3,6 @@ import styles from './Card.module.css'
 
 
 export function Card(props) {
-  debugger;
   let cards = props.cards
     .map(card => {
       return (

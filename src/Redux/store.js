@@ -1,13 +1,11 @@
 
-import {combineReducers, compose, createStore} from "redux";
+import {compose, createStore} from "redux";
 import cardsReducer from "./rootReducer";
 
 
-let reducers = combineReducers(
-  {cardsPage: cardsReducer}
-)
 
-let store = createStore(reducers,
+
+let store = createStore(cardsReducer,
   compose(
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   ))
