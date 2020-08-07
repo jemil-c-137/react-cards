@@ -1,6 +1,6 @@
 .app {
   height: 100vh;
-  background: url("./components/Wrapper/rick.jpg");
+  background: url("./assets/imgs/rickBackground.jpg");
   background-size: 100% 100%;
 
   display: flex;

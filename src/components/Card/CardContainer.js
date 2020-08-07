@@ -3,7 +3,7 @@ import {
   comparingAC,
   handleFlipCardAC, restartGameAC,
   setMathchedCards,
-  setToCompare, shuffleCardsAC,
+  setToCompare,
   undoComparing
 } from "../../Redux/rootReducer";
 import {connect} from "react-redux";
@@ -14,7 +14,6 @@ import React from "react";
 export class CardContainer extends React.Component {
 
   restart = (guessedCards) => {
-    debugger;
     if (guessedCards.length === this.props.cards.length) {
       this.props.restartGame()
     }
@@ -44,7 +43,6 @@ export class CardContainer extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    debugger;
     let guessedCards = this.props.cards.filter(card => card.isGuessed === true);
     if (this.props.toCompare.length === 2) {
       this.compareCards(this.props.toCompare)
@@ -69,9 +67,9 @@ export class CardContainer extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    cards: state.cardsPage.cards,
-    toCompare: state.cardsPage.toCompare,
-    canFlip: state.cardsPage.canFlip
+    cards: state.cards,
+    toCompare: state.toCompare,
+    canFlip: state.canFlip
   }
 }
 
@@ -94,9 +92,6 @@ const mapDispatchToProps = (dispatch) => {
     },
     unSetComparing: () => {
       dispatch(undoComparing())
-    },
-    shuffleAlgorithm: (cardsToShuffle) => {
-      dispatch(shuffleCardsAC(cardsToShuffle))
     },
     restartGame: () => {
       dispatch(restartGameAC())

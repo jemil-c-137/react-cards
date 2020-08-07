@@ -22,8 +22,8 @@ function App(props) {
 
 const mapStateToProps = (state) => {
   return {
-    gameOver: state.cardsPage.gameOver,
-    cards: state.cardsPage.cards
+    gameOver: state.gameOver,
+    cards: state.cards
   }
 }
 

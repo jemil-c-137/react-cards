@@ -1,12 +1,12 @@
 
-import rick from '../assets/rick.png'
-import unity from '../assets/unity.png'
-import morty from '../assets/morty.png'
-import beth from '../assets/beth.png'
-import meeseeks from '../assets/meeseeks.png'
-import mrPoopy from '../assets/mr.png'
-import summer from '../assets/summer.png'
-import jerry from '../assets/jerry.png'
+import rick from '../assets/imgs/rick.png'
+import unity from '../assets/imgs/unity.png'
+import morty from '../assets/imgs/morty.png'
+import beth from '../assets/imgs/beth.png'
+import meeseeks from '../assets/imgs/meeseeks.png'
+import mrPoopy from '../assets/imgs/mr.png'
+import summer from '../assets/imgs/summer.png'
+import jerry from '../assets/imgs/jerry.png'
 
 
 
@@ -40,18 +40,13 @@ export const initialState = {
       { id: 16, face: meeseeks, type: 'meeseeks', isGuessed: false, isComparing: false, isClicked: false},
     ],
     canFlip: true,
-    toCompare: [
-
-    ],
+    toCompare: [],
     gameOver: true
 }
-
-
 
 const cardsReducer = (state = initialState, action) => {
   switch (action.type) {
     case CARD_CLICKED: {
-
       return {
         ...state,
         cards: state.cards.map(card => {
@@ -63,7 +58,6 @@ const cardsReducer = (state = initialState, action) => {
       }
     }
     case SET_MATCHED: {
-
       return {
         ...state,
         cards: state.cards.map(card => {
@@ -76,21 +70,18 @@ const cardsReducer = (state = initialState, action) => {
       }
     }
     case SET_CAN_FLIP: {
-
       return {
         ...state,
         canFlip: action.toggle
       }
     }
     case GET_COMPARE: {
-
       return {
         ...state,
         toCompare: [...state.toCompare, action.comparingCard]
       }
     }
     case SET_COMPARE: {
-
       return {
         ...state,
         cards: state.cards.map(card => {
@@ -102,7 +93,6 @@ const cardsReducer = (state = initialState, action) => {
       }
     }
     case DEL_COMPARE: {
-
       return {
         ...state,
         toCompare: [],
@@ -112,7 +102,6 @@ const cardsReducer = (state = initialState, action) => {
       }
     }
     case SHUFFLE_CARDS: {
-      debugger;
       return {
         ...state
       }
@@ -126,7 +115,6 @@ const cardsReducer = (state = initialState, action) => {
     }
 
     case RESTART: {
-debugger;
       return  {
       ...initialState
       }
