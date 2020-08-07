@@ -4,8 +4,25 @@
   margin: 0;
 }
 
+
+@font-face {
+  font-family: 'Get Schwifty';
+  src: local('MyFont'), url("./GetSchwifty-Regular.woff") format('woff');
+}
+@font-face {
+  font-family: 'Get Schwifty';
+  src: local('MyFont'), url("./GetSchwifty-Regular.woff2") format('woff2');
+}
+@font-face {
+  font-family: 'Get Schwifty';
+  src: local('MyFont'), url("./GetSchwifty-Regular.ttf") format('ttf');
+}
+
+
 .header {
-  font-size: 20px;
+  font-size: 30px;
+  font-family: "Get Schwifty", cursive;
   color: #B2FF59;
   text-align: center;
+  margin-bottom: 2%;
 }
